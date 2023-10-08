@@ -8,3 +8,17 @@ ADR Jumper connected: 0x05
 ADR Jumper disconnected: 0x06
 
 Each Playing with Fusion I2C interface board comes with 2 available I2C addresses, which can be easily selected by disconnecting a jumper on the printed circuit board. This allows for 2 of the same boards (ex: 2 button boards) to be used on the same QWIIC chain. If you would like more than 2, see docs/Programming Instructions and flash a modified firmware with additional I2C address options.
+
+## Example Projects
+RC Transmitter: https://github.com/PlayingWithFusion/RC_Transmitter
+
+## Related
+PwFusion_I2C_Buttons_Arduino_Library:   https://github.com/PlayingWithFusion/PwFusion_I2C_Buttons_Arduino_Library
+PwFusion_Data_Transfer:                 https://github.com/PlayingWithFusion/PwFusion_Data_Transfer
+
+IFB-40001 PwFusion_I2C_Encoder:     https://github.com/PlayingWithFusion/PwFusion_I2C_Encoder
+IFB-40002 PwFusion_I2C_Joystick:    https://github.com/PlayingWithFusion/PwFusion_I2C_Joystick
+IFB-40003 PwFusion_I2C_Switch:      https://github.com/PlayingWithFusion/PwFusion_I2C_Switch
+IFB-40004 PwFusion_I2C_Buttons:     https://github.com/PlayingWithFusion/PwFusion_I2C_Buttons
+
+Visit https://www.playingwithfusion.com/ for more information.
