@@ -45,10 +45,13 @@
 
 #include <WireS.h>
 
-uint8_t primaryAddress = 0x05;
-uint8_t secondaryAddress = 0x06;
+uint8_t address0 = 0x09;
+uint8_t address1 = 0x10;
+uint8_t address2 = 0x11;
+uint8_t address3 = 0x12;
 
-#define ADR_SEL 9
+#define ADR_SEL_0 2
+#define ADR_SEL_1 3
 
 int buttonVoltage;
 
@@ -56,14 +59,10 @@ int analogPin = A0;
 
 struct memoryMap {
   uint8_t btn;
-  // uint8_t vry;
-  // uint8_t sw;
 };
 
 volatile memoryMap registerMap = {
   .btn = 0x00,
-  // .vry = 0x01,
-  // .sw = 0x02,
 };
 
 // Create a pointer so the register number refers to data in the registerMap.
@@ -74,23 +73,23 @@ volatile byte registerPosition;
 
 void setup() {
 
-  pinMode(ADR_SEL, INPUT);
+  pinMode(ADR_SEL_0, INPUT);
+  pinMode(ADR_SEL_1, INPUT);
 
   startI2C();
-
-  
-
-  //pinMode(analogPin, INPUT);
-  //pinMode(addressSelector, INPUT);
-
 
 }
 
 void startI2C() {
-  if (digitalRead(ADR_SEL) == LOW) {
-    Wire.begin(primaryAddress);
+  // Select the correct I2C address based on the state of the ADR jumper
+  if (digitalRead(ADR_SEL_0) == LOW && digitalRead(ADR_SEL_1) == LOW) { 
+    Wire.begin(address0);
+  } else if (digitalRead(ADR_SEL_0) == HIGH && digitalRead(ADR_SEL_1) == LOW) {
+    Wire.begin(address1);
+  } else if (digitalRead(ADR_SEL_0) == LOW && digitalRead(ADR_SEL_1) == HIGH) {
+    Wire.begin(address2);
   } else {
-    Wire.begin(secondaryAddress);
+    Wire.begin(address3);
   }
 
   Wire.onReceive(receiveEvent);
@@ -98,8 +97,6 @@ void startI2C() {
 }
 
 void loop() {
-  //registerMap.btn = analogRead(analogPin);
-  // registerMap.btn = (analogRead(analogPin) * 5  +512) / 1024;
   buttonVoltage = map(analogRead(analogPin), 0, 1024, 0, 255);
 
   if (buttonVoltage > 210) registerMap.btn = 0;
@@ -113,9 +110,6 @@ void loop() {
 
 void requestEvent() {
   Wire.write(registerMap.btn);
-  // for (int i = 0; i < 2; i++) {
-  //    Wire.write(arr[i]);
-  // }
 }
 
 void receiveEvent(byte howMany) {
