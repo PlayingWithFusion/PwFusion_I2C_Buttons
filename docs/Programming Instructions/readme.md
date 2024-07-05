@@ -42,6 +42,29 @@ Within the Arduino IDE, select Tools->Board->ATTinyCore (in sketchbook). This wi
 
 ---
 
+**Step 5**
+
+![](images/img_12.png)
+
+Open the library manager on the left side of the Arduino IDE. Install the needed library for the board (i.e. PwFusion_I2C_Encoder_Arduino_Library for the encoder, etc.)
+If you are experiencing dependency issues, install the PwFusion_Data_Transfer library.
+
+**Step 6**
+
+![](images/img_14.png)
+
+Install the ezbutton library as well.
+
+**Step 7**
+
+![](images/img_13.png)
+
+ATTiny core boards need a specific I2C library to run. This library can be installed from github [here](https://github.com/orangkucing/WireS). Download this zip file and extract it to your Arduino's sketchbook->libraries folder.
+
+
+
+
+
 ## Sparkfun Tiny Programmer
 
 **Step 1**
